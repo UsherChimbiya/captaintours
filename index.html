@@ -140,11 +140,12 @@
    <h4 class="mb-0">Book a car</h4>
   </div>
  </div>
+ <form action="assets/reserve_process.php">
  <div class="row booking_2 mt-4">
   <div class="col-md-4 col-sm-6">
    <div class="booking_2i">
     <h6 class="mb-3"><i class="fa fa-car me-1 col_oran"></i> Select Your Car Type</h6>
-	<select class="form-select" id="example-select">
+	<select class="form-select" id="example-select" name="car_type">
         <option>Select your car type</option>
         <option>Mercedes</option>
         <option>Lexus CT</option>
@@ -185,12 +186,12 @@
 	<div class="booking_2i1 row">
 	 <div class="col-md-8">
 	  <div class="booking_2i1l">
-	    <input class="form-control" id="example-date" type="date" name="date">
+	    <input class="form-control" id="example-date" type="date" name="pick_up_date">
 	  </div>
 	 </div>
 	 <div class="col-md-4 ps-0">
 	  <div class="booking_2i1r">
-	    <select class="form-select" id="example-select">
+	    <select class="form-select" id="example-select" name="pick_up_time">
 <option value="12:00 AM">12:00 AM</option>
 <option value="12:30 AM">12:30 AM</option>
 <option value="01:00 AM">01:00 AM</option>
@@ -251,7 +252,7 @@
 	<div class="booking_2i1 row">
 	 <div class="col-md-8">
 	  <div class="booking_2i1l">
-	    <input class="form-control" id="example-date" type="date" name="date">
+	    <input class="form-control" id="example-date" type="date" name="drop_of_date">
 	  </div>
 	 </div>
 	 <div class="col-md-4 ps-0">
@@ -311,11 +312,9 @@
 	</div>
    </div>
   </div>
-  <div class="col-md-4 col-sm-12">
-   <div class="booking_2i">
-        <h6 class="mb-3"><i class="fa fa-search me-1 col_oran"></i> Find</h6>
-	<h6 class="text-center mb-0"><a class="button pt-3 pb-3 d-block" href="#">Search</a></h6>
-   </div>
+  <div class="button">
+	<h6 class="text-center mb-0"><input class="button pt-3 pb-3 d-block" type="submit" name="submit"></h6>
+</div>
   </div>
  </div>
  </div>
