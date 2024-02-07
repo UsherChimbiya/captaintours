@@ -140,7 +140,7 @@
    <h4 class="mb-0">Book a car</h4>
   </div>
  </div>
- <form action="assets/reserve_process.php">
+ <form action="assets/reserve_process.php" method="post">
  <div class="row booking_2 mt-4">
   <div class="col-md-4 col-sm-6">
    <div class="booking_2i">
@@ -156,8 +156,8 @@
   </div>
   <div class="col-md-4 col-sm-6">
    <div class="booking_2i">
-    <h6 class="mb-3"><i class="fa fa-map-marker me-1 col_oran"></i> Pick-up</h6>
-	<select class="form-select" id="example-select">
+    <h6 class="mb-3"><i class="fa fa-map-marker me-1 col_oran"></i> Pick up Place</h6>
+	<select class="form-select" id="example-select" name="pick_up_place">
         <option>Delhi road</option>
         <option>Mumbai city</option>
         <option>London</option>
@@ -168,8 +168,8 @@
   </div>
   <div class="col-md-4 col-sm-12">
    <div class="booking_2i">
-    <h6 class="mb-3"><i class="fa fa-map-marker me-1 col_oran"></i> Drop-of</h6>
-	<select class="form-select" id="example-select">
+    <h6 class="mb-3"><i class="fa fa-map-marker me-1 col_oran"></i> Drop of Place</h6>
+	<select class="form-select" id="example-select" name="drop_up_place">
         <option>Delhi road</option>
         <option>Mumbai city</option>
         <option>London</option>
@@ -182,65 +182,17 @@
  <div class="row booking_2 mt-4">
   <div class="col-md-4 col-sm-6">
    <div class="booking_2i">
-    <h6 class="mb-3"><i class="fa fa-calendar me-1 col_oran"></i> Pick-up</h6>
+    <h6 class="mb-3"><i class="fa fa-calendar me-1 col_oran"></i> Pick up Date</h6>
 	<div class="booking_2i1 row">
 	 <div class="col-md-8">
 	  <div class="booking_2i1l">
-	    <input class="form-control" id="example-date" type="date" name="pick_up_date">
+	    <input class="form-control" id="example-date" type="date" name="pick_up_date" >
+       
 	  </div>
 	 </div>
 	 <div class="col-md-4 ps-0">
 	  <div class="booking_2i1r">
-	    <select class="form-select" id="example-select" name="pick_up_time">
-<option value="12:00 AM">12:00 AM</option>
-<option value="12:30 AM">12:30 AM</option>
-<option value="01:00 AM">01:00 AM</option>
-<option value="01:30 AM">01:30 AM</option>
-<option value="02:00 AM">02:00 AM</option>
-<option value="02:30 AM">02:30 AM</option>
-<option value="03:00 AM">03:00 AM</option>
-<option value="03:30 AM">03:30 AM</option>
-<option value="04:00 AM">04:00 AM</option>
-<option value="04:30 AM">04:30 AM</option>
-<option value="05:00 AM">05:00 AM</option>
-<option value="05:30 AM">05:30 AM</option>
-<option value="06:00 AM">06:00 AM</option>
-<option value="06:30 AM">06:30 AM</option>
-<option value="07:00 AM">07:00 AM</option>
-<option value="07:30 AM">07:30 AM</option>
-<option value="08:00 AM">08:00 AM</option>
-<option value="08:30 AM">08:30 AM</option>
-<option value="09:00 AM">09:00 AM</option>
-<option value="09:30 AM">09:30 AM</option>
-<option value="10:00 AM">10:00 AM</option>
-<option value="10:30 AM">10:30 AM</option>
-<option value="11:00 AM">11:00 AM</option>
-<option value="11:30 AM">11:30 AM</option>
-<option value="12:00 PM">12:00 PM</option>
-<option value="12:30 PM">12:30 PM</option>
-<option value="01:00 PM">01:00 PM</option>
-<option value="01:30 PM">01:30 PM</option>
-<option value="02:00 PM">02:00 PM</option>
-<option value="02:30 PM">02:30 PM</option>
-<option value="03:00 PM">03:00 PM</option>
-<option value="03:30 PM">03:30 PM</option>
-<option value="04:00 PM">04:00 PM</option>
-<option value="04:30 PM">04:30 PM</option>
-<option value="05:00 PM">05:00 PM</option>
-<option value="05:30 PM">05:30 PM</option>
- <option value="06:00 PM">06:00 PM</option>
-<option value="06:30 PM">06:30 PM</option>
-<option value="07:00 PM">07:00 PM</option>
-<option value="07:30 PM">07:30 PM</option>
-<option value="08:00 PM">08:00 PM</option>
-<option value="08:30 PM">08:30 PM</option>
-<option value="09:00 PM">09:00 PM</option>
-<option value="09:30 PM">09:30 PM</option>
-<option value="10:00 PM">10:30 PM</option>
-<option value="10:30 PM">12:00 AM</option>
-<option value="11:00 PM">11:00 PM</option>
-<option value="11:30 PM">11:30 PM</option>
-</select>
+      <input class="form-control" id="example-date" type="time" name="pick_up_time" >
 	  </div>
 	 </div>
 	</div>
@@ -248,77 +200,29 @@
   </div>
   <div class="col-md-4 col-sm-6">
    <div class="booking_2i">
-    <h6 class="mb-3"><i class="fa fa-calendar me-1 col_oran"></i> Drop-of</h6>
+    <h6 class="mb-3"><i class="fa fa-calendar me-1 col_oran"></i> Drop off Date</h6>
 	<div class="booking_2i1 row">
 	 <div class="col-md-8">
 	  <div class="booking_2i1l">
-	    <input class="form-control" id="example-date" type="date" name="drop_of_date">
+	    <input class="form-control" id="example-date" type="date" name="drop_off_date">
 	  </div>
 	 </div>
 	 <div class="col-md-4 ps-0">
 	  <div class="booking_2i1r">
-	    <select class="form-select" id="example-select">
-<option value="12:00 AM">12:00 AM</option>
-<option value="12:30 AM">12:30 AM</option>
-<option value="01:00 AM">01:00 AM</option>
-<option value="01:30 AM">01:30 AM</option>
-<option value="02:00 AM">02:00 AM</option>
-<option value="02:30 AM">02:30 AM</option>
-<option value="03:00 AM">03:00 AM</option>
-<option value="03:30 AM">03:30 AM</option>
-<option value="04:00 AM">04:00 AM</option>
-<option value="04:30 AM">04:30 AM</option>
-<option value="05:00 AM">05:00 AM</option>
-<option value="05:30 AM">05:30 AM</option>
-<option value="06:00 AM">06:00 AM</option>
-<option value="06:30 AM">06:30 AM</option>
-<option value="07:00 AM">07:00 AM</option>
-<option value="07:30 AM">07:30 AM</option>
-<option value="08:00 AM">08:00 AM</option>
-<option value="08:30 AM">08:30 AM</option>
-<option value="09:00 AM">09:00 AM</option>
-<option value="09:30 AM">09:30 AM</option>
-<option value="10:00 AM">10:00 AM</option>
-<option value="10:30 AM">10:30 AM</option>
-<option value="11:00 AM">11:00 AM</option>
-<option value="11:30 AM">11:30 AM</option>
-<option value="12:00 PM">12:00 PM</option>
-<option value="12:30 PM">12:30 PM</option>
-<option value="01:00 PM">01:00 PM</option>
-<option value="01:30 PM">01:30 PM</option>
-<option value="02:00 PM">02:00 PM</option>
-<option value="02:30 PM">02:30 PM</option>
-<option value="03:00 PM">03:00 PM</option>
-<option value="03:30 PM">03:30 PM</option>
-<option value="04:00 PM">04:00 PM</option>
-<option value="04:30 PM">04:30 PM</option>
-<option value="05:00 PM">05:00 PM</option>
-<option value="05:30 PM">05:30 PM</option>
- <option value="06:00 PM">06:00 PM</option>
-<option value="06:30 PM">06:30 PM</option>
-<option value="07:00 PM">07:00 PM</option>
-<option value="07:30 PM">07:30 PM</option>
-<option value="08:00 PM">08:00 PM</option>
-<option value="08:30 PM">08:30 PM</option>
-<option value="09:00 PM">09:00 PM</option>
-<option value="09:30 PM">09:30 PM</option>
-<option value="10:00 PM">10:30 PM</option>
-<option value="10:30 PM">12:00 AM</option>
-<option value="11:00 PM">11:00 PM</option>
-<option value="11:30 PM">11:30 PM</option>
-</select>
+      <input class="form-control" id="example-date" type="time" name="drop_off_time">
 	  </div>
 	 </div>
 	</div>
    </div>
   </div>
-  <div class="button">
+  <div class="button_submit">
 	<h6 class="text-center mb-0"><input class="button pt-3 pb-3 d-block" type="submit" name="submit"></h6>
 </div>
   </div>
  </div>
  </div>
 </div>
+</form>
 </section>
  </div>
 </div>

@@ -16,18 +16,20 @@ if ($conn->connect_error) {
 // Handle form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve form data
-    $destination = $_POST["destination"];
-    $transfer_type = $_POST["transfer_type"];
-    $from_place = $_POST["from_place"];
-    $to_place= $_POST["to_place"];
-    $arrival_date = $_POST["arrival_date"];
-    $departure_date = $_POST["departure_date"];
-    $adult = $_POST["adult"];
-    $children = $_POST["children"];
+    $car_type = $_POST["car_type"];
+    $pick_up_place = $_POST["pick_up_place"];
+    $pick_up_date = $_POST["pick_up_date"];
+    $pick_up_time = $_POST["pick_up_time"];
+   // $drop_off_place = $_POST["drop_off_place"];
+   // $drop_off_date = $_POST["drop_off_date"];
+   // $drop_off_time = $_POST["drop_off_time"];
+    $drop_off_place = isset($_POST["drop_off_place"]) ? $_POST["drop_off_place"] : "";
+    $drop_off_date = isset($_POST["drop_off_date"]) ? $_POST["drop_off_date"] : "";
+    $drop_off_time = isset($_POST["drop_off_time"]) ? $_POST["drop_off_time"] : "";
 
     // Prepare and execute SQL statement
-    $sql = "INSERT INTO reservation (destination, transfer_type, from_place, to_place, arrival_date, departure_date, adult, children)
-            VALUES ('$destination', '$transfer_type', '$from_place', '$to_place', '$arrival_date', '$departure_date', $adult, $children)";
+    $sql = "INSERT INTO reservations (car_type, pick_up_place, pick_up_date, pick_up_time, drop_off_place, drop_off_date, drop_off_time)
+            VALUES ('$car_type', '$pick_up_place', '$pick_up_date', '$pick_up_time', '$drop_off_place', '$drop_off_date', '$drop_off_time')";
 
     if ($conn->query($sql) === TRUE) {
         echo "Reservation successfully added!";
