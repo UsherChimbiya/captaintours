@@ -1,3 +1,19 @@
+<?php
+// Check if the form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Retrieve form data
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+
+    // Here, you would typically validate the user's credentials against a database
+    // For this example, let's assume the email and password are correct
+    // Replace this with your actual login validation logic
+
+    // If login is successful, redirect the user to reservation.html
+    header("Location: reservation.html");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
