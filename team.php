@@ -1,3 +1,12 @@
+<?php
+  session_start();
+  if (!isset($_SESSION['customer_id'])) {
+    // User is not logged in, redirect to login page
+    header("Location: login.php");
+    exit();
+  }
+  $customer_id = $_SESSION['customer_id'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,7 +39,7 @@
           <a class="nav-link" aria-current="page" href="index.html">Home</a>
         </li>
 		<li class="nav-item">
-          <a class="nav-link" href="about.html">About </a>
+          <a class="nav-link" href="about.php">About </a>
         </li>
 		<li class="nav-item">
           <a class="nav-link" href="models.html">Vehicle Models </a>

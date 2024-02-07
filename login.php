@@ -1,19 +1,55 @@
 <?php
-// Check if the form is submitted
+session_start();
+
+// Initialize error message variable
+$error_message = "";
+
+// Check if form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Retrieve form data
-    $email = $_POST["email"];
-    $password = $_POST["password"];
+    // Database connection parameters
+    $servername = "localhost"; // Change this to your database server
+    $username = "root"; // Change this to your database username
+    $password = ""; // Change this to your database password
+    $dbname = "carbooking"; // Change this to your database name
 
-    // Here, you would typically validate the user's credentials against a database
-    // For this example, let's assume the email and password are correct
-    // Replace this with your actual login validation logic
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
 
-    // If login is successful, redirect the user to reservation.html
-    header("Location: reservation.html");
-    exit;
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    // Retrieve form data and sanitize
+    $email = mysqli_real_escape_string($conn, $_POST["email"]);
+    $password = mysqli_real_escape_string($conn, $_POST["password"]);
+
+    // SQL query to check if the user exists and the password is correct
+    $sql = "SELECT * FROM customers WHERE email = '$email'";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows == 1) {
+        $row = $result->fetch_assoc();
+        if (password_verify($password, $row['password'])) { 
+    // Set session variables
+    $_SESSION['customer_id'] = $customer_id; // Store the customer ID in the session
+    // Set other session variables as needed
+    header("Location: reservation.php"); // Redirect to the dashboard or another page
+    exit();
+        } else {
+            // Invalid password, set error message
+            $error_message = "Invalid password. Please try again.";
+        }
+    } else {
+        // User not found, set error message
+        $error_message = "User not found. Please register.";
+    }
+
+    // Close database connection
+    $conn->close();
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,52 +69,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <div class="main_o clearfix position-relative">
  <div class="main_1 clearfix position-absolute top-0 w-100">
-   <section id="header">
-    <nav class="navbar navbar-expand-md navbar-light" id="navbar_sticky" style="background:#00a0df">
-      <div class="container-xl">
-        <a class="navbar-brand fs-3 p-0 fw-bold text-white" href="index.html"></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mb-0 ">
-        <li class="nav-item dropdown">
-          <a style="font-size:15px;font-family:Arial" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            DESTINATION
-          </a>
-          <ul class="dropdown-menu drop_1" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="blog.html" style="font-size:12px"> Blog</a></li>
-            <li><a class="dropdown-item border-0" href="blog_detail.html" style="font-size:12px"> Blog Detail</a></li>
-          </ul>
-          </li>
-        <li class="nav-item">
-              <a class="nav-link mx-2" href="about.html" style="font-size:15px;font-family:Arial">ABOUT US</a>
-            </li>
-        <li class="nav-item">
-          <a class="nav-link mx-2" style="font-size:15px;font-family:Arial" href="contact.html">CONTACT US</a>
-          </li>
-        <li class="nav-item">
-              <a class="nav-link mx-2" href="reservation.html" style="font-size:15px;font-family:Arial">RESERVATION</a>
-            </li>
-        <li class="nav-item">
-          <a class="nav-link mx-2" href="cart.html" style="font-size:15px;font-family:Arial"><i class="fa fa-shopping-cart"></i></a>
-          </li>
-          </ul>
-        <ul class="navbar-nav mb-0 ms-auto">
-        <li class="nav-item">
-              <a class="nav-link mx-2" href="login.php" style="font-size:15px;font-family:Arial">Sign In</a>
-            </li>
-        <li class="nav-item">
-              <a class="mx-2 nav-link button_2 ms-2 me-2" href="register.php" style="font-size:15px;font-family:Arial">Register <i class="fa fa-check-circle ms-1"></i></a>
-            </li>
-        
-          </ul>
-        </div>
-      </div>
-    </nav>
-</section>
+ <?php include 'header.php'; ?>
  </div>
  <div class="main_2 clearfix">
+ <?php if (!empty($error_message)) : ?>
+    <div class="error-message">
+        <?php echo $error_message; ?>
+    </div>
+<?php endif; ?>
  <section id="center" class="center_login">
    <div class="center_om clearfix">
      <div class="container-xl">
