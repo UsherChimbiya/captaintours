@@ -48,8 +48,9 @@ $conn->close();
                             DESTINATION
                         </a>
                         <ul class="dropdown-menu drop_1" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="blog.php" style="font-size:12px"> Blog</a></li>
-                            <li><a class="dropdown-item border-0" href="blog_detail.php" style="font-size:12px"> Blog Detail</a></li>
+                            <li><a class="dropdown-item" href="#" style="font-size:12px"> USA</a></li>
+                            <li><a class="dropdown-item border-0" href="#" style="font-size:12px">UK</a></li>
+                            <li><a class="dropdown-item border-0" href="#" style="font-size:12px">Canada</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">

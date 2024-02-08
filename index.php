@@ -4,28 +4,13 @@
     if(isset($_SESSION['customer_id'])) {
         $customer_id = $_SESSION['customer_id'];
         // Proceed with using $customer_id
-    } else {
-        // Handle the case where the user is not logged in
-        // For example, you could redirect them to the login page
-        header("Location: login.php");
-        exit(); // Ensure script stops executing after redirection
     }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Car Lease</title>
-	<link href="css/bootstrap.min.css" rel="stylesheet" >
-	<link href="css/font-awesome.min.css" rel="stylesheet" >
-	<link href="css/global.css" rel="stylesheet">
-	<link href="css/index.css" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-	<script src="js/bootstrap.bundle.min.js"></script>
-</head>
+
+<?php include('head.php'); ?>
 <body>
 	<div class="container">
 		<div class="row mt-4">

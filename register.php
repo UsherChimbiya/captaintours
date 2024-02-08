@@ -4,12 +4,7 @@ session_start();
     if(isset($_SESSION['customer_id'])) {
         $customer_id = $_SESSION['customer_id'];
         // Proceed with using $customer_id
-    } else {
-        // Handle the case where the user is not logged in
-        // For example, you could redirect them to the login page
-        header("Location: login.php");
-        exit(); // Ensure script stops executing after redirection
-    }
+    } 
 $error_message = ""; // Initialize error message variable
 $success_message = ""; // Initialize success message variable
 
