@@ -48,8 +48,9 @@ $conn->close();
                             DESTINATION
                         </a>
                         <ul class="dropdown-menu drop_1" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="blog.php" style="font-size:12px"> Blog</a></li>
-                            <li><a class="dropdown-item border-0" href="blog_detail.php" style="font-size:12px"> Blog Detail</a></li>
+                            <li><a class="dropdown-item" href="#" style="font-size:12px"> USA</a></li>
+                            <li><a class="dropdown-item border-0" href="#" style="font-size:12px">UK</a></li>
+                            <li><a class="dropdown-item border-0" href="#" style="font-size:12px">Canada</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
@@ -68,7 +69,15 @@ $conn->close();
                 <ul class="navbar-nav mb-0 ms-auto">
                 <?php if(isset($_SESSION['customer_id'])): ?>
                     <li class="nav-item">
-                        <a class="nav-link mx-2" href="#" style="font-size:15px;font-family:Arial"><?php echo $fullname; ?></a>
+                        <a class="nav-link mx-2" href="#" style="font-size:15px;font-family:Arial"></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a style="font-size:15px;font-family:Arial" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <?php echo $fullname; ?>
+                        </a>
+                        <ul class="dropdown-menu drop_1" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="logout.php" style="font-size:12px"> Logout</a></li>
+                        </ul>
                     </li>
                 <?php else: ?>
                     <li class="nav-item">
