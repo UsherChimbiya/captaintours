@@ -5,9 +5,12 @@
         $entered_email = $_POST['email'];
         $entered_password = $_POST['password'];
         $entered_username = $_POST['fullname'];
-        $sql = "SELECT * FROM users WHERE email = '$entered_email' AND password = '$entered_password'";
+        $sql = "SELECT * FROM users WHERE email = '$entered_email'";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $hashed_password = $row["password"];
+            if (password_verify($entered_password, $hashed_password)) {
             $_SESSION['email'] = $entered_email;
             $_SESSION['fullname'] = $entered_username;
             header("location:main.php");
@@ -17,6 +20,7 @@
         }
     }
     $conn->close();
+  }
     ?>
 
 <!DOCTYPE html>
@@ -44,9 +48,9 @@
 	 <h3 class="col_oran">Login</h3>
 	 <p>login with your account</p>
 	 <h6 class="mt-4">Email Address</h6>
-	 <input type="email" class="form-control" name="email" placeholder="Your Email">
+	 <input type="email" class="form-control" name="email" placeholder="Your Email" autocomplete="off" >
 	 <h6 class="mt-4">Password</h6>
-	 <input type="password" class="form-control" name="password" placeholder="Your Password">
+	 <input type="password" class="form-control" name="password" placeholder="Your Password" autocomplete="off">
 	 <div class="d-flex justify-content-between mt-4">
 <div class="form-check">
 <input class="form-check-input" type="checkbox" value="" id="remember">
