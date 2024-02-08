@@ -5,9 +5,12 @@
         $entered_email = $_POST['email'];
         $entered_password = $_POST['password'];
         $entered_username = $_POST['fullname'];
-        $sql = "SELECT * FROM users WHERE email = '$entered_email' AND password = '$entered_password'";
+        $sql = "SELECT * FROM users WHERE email = '$entered_email'";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $hashed_password = $row["password"];
+            if (password_verify($entered_password, $hashed_password)) {
             $_SESSION['email'] = $entered_email;
             $_SESSION['fullname'] = $entered_username;
             header("location:main.php");
@@ -17,6 +20,7 @@
         }
     }
     $conn->close();
+  }
     ?>
 
 <!DOCTYPE html>
