@@ -729,6 +729,11 @@ dolore doloribus id repellendus tempora vitae quia voluptas ipsum eligendi hic.<
 	<div class="col-md-3">
 	 <div class="footer_1i">
 	  <h4>SUBSCRIPTION</h4>
+	  <?php 
+      if (isset($message) && $message != '') {
+          echo '<div class="error red" style="color: green; font-size: 14px;">' . $error_message . '</div>';
+      }
+    ?>
       <p class="mt-3" style="color:white">Subscribe your Email address for latest news & updates.</p>
 	 <form action="assets/subscribe_process.php" method="post"> 
 	  <input class="form-control"name="email" placeholder="Enter Email Address" type="text">

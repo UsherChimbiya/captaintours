@@ -49,6 +49,7 @@ if (isset($_POST['form1'])) {
             $error_message .= 'Password does not match<br>';
         } else {
             $_SESSION['id'] = $row;
+            $success_message .= 'Logged in Successfully<br>';
             header("location: index.php");
             exit(); // Exit after redirect
         }
@@ -106,6 +107,9 @@ if (isset($_POST['form1'])) {
    <?php 
       if (isset($error_message) && $error_message != '') {
           echo '<div class="error red" style="color: red; font-size: 14px;">' . $error_message . '</div>';
+      }
+      if (isset($success_message) && $success_message != '') {
+        echo '<div class="error red" style="color: green; font-size: 14px;">' . $success_message . '</div>';
       }
     ?>
 

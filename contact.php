@@ -1,5 +1,6 @@
 <?php
   session_start();
+  $customer_id = $_SESSION['customer_id'];
 ?>
 <!DOCTYPE html>
 <html lang="en">

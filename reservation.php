@@ -1,5 +1,6 @@
 <?php
   session_start();
+  $customer_id = $_SESSION['customer_id'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,7 +15,6 @@
 	<link href="css/reservation.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 	<script src="js/bootstrap.bundle.min.js"></script>
-
 </head>
 <body>
   <div class="main_o clearfix position-relative">
