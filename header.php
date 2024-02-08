@@ -75,7 +75,7 @@ $conn->close();
                             <?php echo $fullname; ?>
                         </a>
                         <ul class="dropdown-menu drop_1" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="admin/logout.php" style="font-size:12px"> Logout</a></li>
+                            <li><a class="dropdown-item" href="logout.php" style="font-size:12px"> Logout</a></li>
                         </ul>
                     </li>
                 <?php else: ?>
