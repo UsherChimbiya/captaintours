@@ -730,9 +730,11 @@ dolore doloribus id repellendus tempora vitae quia voluptas ipsum eligendi hic.<
 	 <div class="footer_1i">
 	  <h4>SUBSCRIPTION</h4>
       <p class="mt-3" style="color:white">Subscribe your Email address for latest news & updates.</p>
-	  <input class="form-control" placeholder="Enter Email Address" type="text">
-	  <h6 class="mb-0 mt-4"><a class="button pt-3 pb-3" href="#">Submit <i class="fa fa-check-circle ms-1"></i> </a></h6>
-	 </div>
+	 <form action="assets/subscribe_process.php" method="post"> 
+	  <input class="form-control"name="email" placeholder="Enter Email Address" type="text">
+	  <h6 class="mb-0 mt-4"><input type="submit" class="button pt-3 pb-3" name="submit"><i class="fa fa-check-circle ms-1"></i> </a></h6>
+	  </form> 
+	</div>
 	</div>
   </div><hr>
   <div class="row footer_2">
