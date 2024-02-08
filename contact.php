@@ -1,66 +1,20 @@
+<?php
+  session_start();   
+   // Check if the session variable is set
+  if(isset($_SESSION['customer_id'])) {
+	  $customer_id = $_SESSION['customer_id'];
+	  // Proceed with using $customer_id
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Car Lease</title>
-	<link href="css/bootstrap.min.css" rel="stylesheet" >
-	<link href="css/font-awesome.min.css" rel="stylesheet" >
-	<link href="css/global.css" rel="stylesheet">
-	<link href="css/contact.css" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-	<script src="js/bootstrap.bundle.min.js"></script>
 
-</head>
+<?php include('head.php'); ?>
 <body>
 
 <div class="main_o clearfix position-relative">
  <div class="main_1 clearfix position-absolute top-0 w-100">
-   <section id="header">
-	<nav class="navbar navbar-expand-md navbar-light" id="navbar_sticky" style="background:#00a0df">
-		<div class="container-xl">
-		  <a class="navbar-brand fs-3 p-0 fw-bold text-white" href="index.html"></a>
-		  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		  </button>
-		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav mb-0 ">
-			  <li class="nav-item dropdown">
-				  <a style="font-size:15px;font-family:Arial" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-					DESTINATION
-				  </a>
-				  <ul class="dropdown-menu drop_1" aria-labelledby="navbarDropdown">
-					<li><a class="dropdown-item" href="blog.html" style="font-size:12px"> Blog</a></li>
-					<li><a class="dropdown-item border-0" href="blog_detail.html" style="font-size:12px"> Blog Detail</a></li>
-				  </ul>
-				</li>
-			  <li class="nav-item">
-				<a class="nav-link mx-2" href="about.html" style="font-size:15px;font-family:Arial">ABOUT US</a>
-			  </li>
-			  <li class="nav-item">
-				  <a class="nav-link mx-2" style="font-size:15px;font-family:Arial" href="contact.html">CONTACT US</a>
-				</li>
-			  <li class="nav-item">
-				<a class="nav-link mx-2" href="reservation.html" style="font-size:15px;font-family:Arial">RESERVATION</a>
-			  </li>
-			  <li class="nav-item">
-				  <a class="nav-link mx-2" href="cart.html" style="font-size:15px;font-family:Arial"><i class="fa fa-shopping-cart"></i></a>
-				</li>
-			</ul>
-			<ul class="navbar-nav mb-0 ms-auto">
-			  <li class="nav-item">
-				<a class="nav-link mx-2" href="login.html" style="font-size:15px;font-family:Arial">Sign In</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="mx-2 nav-link button_2 ms-2 me-2" href="register.html" style="font-size:15px;font-family:Arial">Register <i class="fa fa-check-circle ms-1"></i></a>
-			  </li>
-			  
-			</ul>
-		  </div>
-		</div>
-	  </nav>
-</section>
+   <?php include 'header.php'; ?>
  </div>
  <div class="main_2 clearfix">
  <section id="center" class="center_contact">
@@ -213,69 +167,7 @@
 </div>
 </div>
 </section>
-
-<section id="footer" class="pt-3 pb-3" style="background:#00a0df;color:white">
-	<div class="container-xl">
-	  <div class="row footer_1">
-		<div class="col-md-4">
-		 <div class="footer_1i">
-		  <h4><a href="index.html"><img src="img/companylogo.png" alt="footer logo" width="40%"></a></h4>
-		  <p class="mt-3 text-white" >Use securing confined his shutters. Delightful as he it acceptance an solicitude discretion.</p>
-		  <h6 class="mt-3 fw-normal text-white"><i class="fa fa-map col_oran me-1"></i> 36 Nora Dreek,  Old East 2360, India</h6>
-		  <h6 class="mt-3 fw-normal text-white"><a href="#" class="text-white"><i class="fa fa-phone col_oran me-1"></i> (123) 456-7890</a></h6>
-		  <h6 class="mt-3 mb-0 fw-normal text-white"><a href="#" class="text-white"><i class="fa fa-envelope col_oran me-1"></i> info@gmail.com</a></h6>
-		 </div>
-		</div>
-		<div class="col-md-2">
-		 <div class="footer_1i">
-		  <h4>COMPANY</h4>
-		  <div class="row">
-		  <h6 class="fw-normal mt-2 col-md-12 col-6 text-white"><a href="#" class="text-white">New York</a></h6>
-		  <h6 class="fw-normal mt-2 col-md-12 col-6 text-white"><a href="#" class="text-white">Careers</a></h6>
-		  <h6 class="fw-normal mt-2 col-md-12 col-6 text-white"><a href="#" class="text-white">Mobile</a></h6>
-		  <h6 class="fw-normal mt-2 col-md-12 col-6 text-white"><a href="#" class="text-white">Blog</a></h6>
-		  <h6 class="fw-normal mt-2 col-md-12 col-6 text-white"><a href="#" class="text-white">About Us</a></h6>
-		  <h6 class="fw-normal mt-2 mb-0 col-md-12 col-6 text-white"><a href="#" class="text-white">How we work</a></h6>
-		  </div>
-		 </div>
-		</div>
-		<div class="col-md-3">
-		 <div class="footer_1i">
-		  <h4>WORK HOURS</h4>
-		  <p class="mt-3" style="color:white">Mon - Fri: <span class="fw-bold" style="color:white">09:00AM - 09:00PM</span></p>
-		  <p class="mt-3" style="color:white">Sat: <span class="fw-bold" style="color:white">09:00AM - 06:00PM</span></p>
-		  <p class="mt-3 mb-0" style="color:white">Sun: <span class="fw-bold" style="color:white">Closed</span></p>
-		 </div>
-		</div>
-		<div class="col-md-3">
-		 <div class="footer_1i">
-		  <h4>SUBSCRIPTION</h4>
-		  <p class="mt-3" style="color:white">Subscribe your Email address for latest news & updates.</p>
-		  <input class="form-control" placeholder="Enter Email Address" type="text">
-		  <h6 class="mb-0 mt-4"><a class="button pt-3 pb-3" href="#">Submit <i class="fa fa-check-circle ms-1"></i> </a></h6>
-		 </div>
-		</div>
-	  </div><hr>
-	  <div class="row footer_2">
-	   <div class="col-md-8">
-		<div class="footer_2l">
-		 <p class="mb-0 mt-1 text-center" style="color:white">© 2024 Captain Travel & Tour. All Rights Reserved</p>
-		</div>
-	   </div>
-	   <div class="col-md-4">
-		<div class="footer_2r text-end">
-		  <ul class="social-network social-circle mb-0">
-						<li><a href="#" class="icoRss" title="Rss"><i class="fa fa-rss"></i></a></li>
-						<li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-pinterest"></i></a></li>
-						<li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
-						<li><a href="#" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
-					</ul>
-		</div>
-	   </div>
-	  </div>
-	</div>
-	</section>
-
+<?php include('footer.php'); ?>
 <script>
 window.onscroll = function() {myFunction()};
 
