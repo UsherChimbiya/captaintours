@@ -7,7 +7,7 @@
                 
                 
                     <li class="nav-label first">Main Menu</li>
-                    <li><a  href="index.php" aria-expanded="false"><i
+                    <li><a  href="main.php" aria-expanded="false"><i
                                 class="icon icon-single-04"></i><span class="nav-text">Dashboard</span></a>
                         
                     </li>
