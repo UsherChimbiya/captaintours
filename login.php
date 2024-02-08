@@ -1,52 +1,58 @@
 <?php
 session_start();
+include("CSRF_Protect.php");
+$csrf = new CSRF_Protect();
 
 // Initialize error message variable
-$error_message = "";
+$error_message =  isset($_GET['error_message']) ? urldecode($_GET['error_message']) : '';
+$success_message = isset($_GET['success_message']) ? urldecode($_GET['success_message']) : '';
 
 // Check if form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if (isset($_POST['form1'])) {
     // Database connection parameters
     $servername = "localhost"; // Change this to your database server
     $username = "root"; // Change this to your database username
     $password = ""; // Change this to your database password
     $dbname = "carbooking"; // Change this to your database name
 
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
+    // Create PDO connection
+    try {
+        $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        // Set PDO error mode to exception
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    } catch(PDOException $e) {
+        die("Connection failed: " . $e->getMessage());
+    }
 
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
+    if(empty($_POST['email']) || empty($_POST['password'])) {
+        $error_message = "Email and/or Password can not be empty.".'<br>';
     }
 
     // Retrieve form data and sanitize
-    $email = mysqli_real_escape_string($conn, $_POST["email"]);
-    $password = mysqli_real_escape_string($conn, $_POST["password"]);
+    $email = $_POST["email"];
+    $password = $_POST["password"];
 
-    // SQL query to check if the user exists and the password is correct
-    $sql = "SELECT * FROM customers WHERE email = '$email'";
-    $result = $conn->query($sql);
+    // Prepare and execute SQL query
+    $statement = $pdo->prepare("SELECT * FROM customers WHERE email=?");
+    $statement->execute(array($email));
+    $total = $statement->rowCount();
+    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-    if ($result->num_rows == 1) {
-        $row = $result->fetch_assoc();
-        if (password_verify($password, $row['password'])) { 
-    // Set session variables
-    $_SESSION['customer_id'] = $customer_id; // Store the customer ID in the session
-    // Set other session variables as needed
-    header("Location: reservation.php"); // Redirect to the dashboard or another page
-    exit();
-        } else {
-            // Invalid password, set error message
-            $error_message = "Invalid password. Please try again.";
-        }
+    if($total == 0) {
+        $error_message .= 'Email Address does not match<br>';
     } else {
-        // User not found, set error message
-        $error_message = "User not found. Please register.";
-    }
+        foreach($result as $row) {
+            $row_password = $row['password'];
+        }
 
-    // Close database connection
-    $conn->close();
+        if($row_password != md5($password)) {
+            $error_message .= 'Password does not match<br>';
+        } else {
+            $_SESSION['id'] = $row;
+            header("location: index.php");
+            exit(); // Exit after redirect
+        }
+    }
 }
 ?>
 
@@ -72,11 +78,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
  <?php include 'header.php'; ?>
  </div>
  <div class="main_2 clearfix">
- <?php if (!empty($error_message)) : ?>
-    <div class="error-message">
-        <?php echo $error_message; ?>
-    </div>
-<?php endif; ?>
+
+
  <section id="center" class="center_login">
    <div class="center_om clearfix">
      <div class="container-xl">
@@ -100,7 +103,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="login_1 p-4 m-auto">
 	 <h3 class="col_oran">Login</h3>
 	 <p>login with your account</p>
-   <form action="login.php" method="post">
+   <?php 
+      if (isset($error_message) && $error_message != '') {
+          echo '<div class="error red" style="color: red; font-size: 14px;">' . $error_message . '</div>';
+      }
+    ?>
+
+   <form action="" method="post">
       <h6 class="mt-4">Email Address</h6>
       <input type="email" name="email" class="form-control" placeholder="Your Email">
       <h6 class="mt-4">Password</h6>
@@ -114,7 +123,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
         <a class="col_oran" href="#">Forgot Password?</a>
       </div>
-      <button type="submit" class="button">Login<i class="fa fa-sign-in ms-1"></i></button>
+      <button type="submit" name="form1" class="button">Login<i class="fa fa-sign-in ms-1"></i></button>
   </form>
    	<p class="mt-4 mb-0">Don't have an account? <a class="col_oran" href="register.php">Register</a></p>
 	</div>

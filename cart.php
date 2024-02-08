@@ -37,11 +37,6 @@
     </div>
     
    </div>
-
-        <h1>Cart Page</h1>
-
-
-
         <section id="footer" class="pt-3 pb-3" style="background:#00a0df;color:white">
             <div class="container-xl">
               <div class="row footer_1">
