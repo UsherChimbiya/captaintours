@@ -1,19 +1,61 @@
 <?php
-// Check if the form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Retrieve form data
+session_start();
+include("CSRF_Protect.php");
+$csrf = new CSRF_Protect();
+
+// Initialize error message variable
+$error_message =  isset($_GET['error_message']) ? urldecode($_GET['error_message']) : '';
+$success_message = isset($_GET['success_message']) ? urldecode($_GET['success_message']) : '';
+
+// Check if form is submitted
+if (isset($_POST['form1'])) {
+    // Database connection parameters
+    $servername = "localhost"; // Change this to your database server
+    $username = "root"; // Change this to your database username
+    $password = ""; // Change this to your database password
+    $dbname = "carbooking"; // Change this to your database name
+
+    // Create PDO connection
+    try {
+        $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        // Set PDO error mode to exception
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    } catch(PDOException $e) {
+        die("Connection failed: " . $e->getMessage());
+    }
+
+    if(empty($_POST['email']) || empty($_POST['password'])) {
+        $error_message = "Email and/or Password can not be empty.".'<br>';
+    }
+
+    // Retrieve form data and sanitize
     $email = $_POST["email"];
     $password = $_POST["password"];
 
-    // Here, you would typically validate the user's credentials against a database
-    // For this example, let's assume the email and password are correct
-    // Replace this with your actual login validation logic
+    // Prepare and execute SQL query
+    $statement = $pdo->prepare("SELECT * FROM customers WHERE email=?");
+    $statement->execute(array($email));
+    $total = $statement->rowCount();
+    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-    // If login is successful, redirect the user to reservation.html
-    header("Location: reservation.html");
-    exit;
+    if($total == 0) {
+        $error_message .= 'Email Address does not match<br>';
+    } else {
+        foreach($result as $row) {
+            $row_password = $row['password'];
+        }
+
+        if($row_password != md5($password)) {
+            $error_message .= 'Password does not match<br>';
+        } else {
+            $_SESSION['id'] = $row;
+            header("location: index.php");
+            exit(); // Exit after redirect
+        }
+    }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,52 +75,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <div class="main_o clearfix position-relative">
  <div class="main_1 clearfix position-absolute top-0 w-100">
-   <section id="header">
-    <nav class="navbar navbar-expand-md navbar-light" id="navbar_sticky" style="background:#00a0df">
-      <div class="container-xl">
-        <a class="navbar-brand fs-3 p-0 fw-bold text-white" href="index.html"></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mb-0 ">
-        <li class="nav-item dropdown">
-          <a style="font-size:15px;font-family:Arial" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            DESTINATION
-          </a>
-          <ul class="dropdown-menu drop_1" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="blog.html" style="font-size:12px"> Blog</a></li>
-            <li><a class="dropdown-item border-0" href="blog_detail.html" style="font-size:12px"> Blog Detail</a></li>
-          </ul>
-          </li>
-        <li class="nav-item">
-              <a class="nav-link mx-2" href="about.html" style="font-size:15px;font-family:Arial">ABOUT US</a>
-            </li>
-        <li class="nav-item">
-          <a class="nav-link mx-2" style="font-size:15px;font-family:Arial" href="contact.html">CONTACT US</a>
-          </li>
-        <li class="nav-item">
-              <a class="nav-link mx-2" href="reservation.html" style="font-size:15px;font-family:Arial">RESERVATION</a>
-            </li>
-        <li class="nav-item">
-          <a class="nav-link mx-2" href="cart.html" style="font-size:15px;font-family:Arial"><i class="fa fa-shopping-cart"></i></a>
-          </li>
-          </ul>
-        <ul class="navbar-nav mb-0 ms-auto">
-        <li class="nav-item">
-              <a class="nav-link mx-2" href="login.php" style="font-size:15px;font-family:Arial">Sign In</a>
-            </li>
-        <li class="nav-item">
-              <a class="mx-2 nav-link button_2 ms-2 me-2" href="register.php" style="font-size:15px;font-family:Arial">Register <i class="fa fa-check-circle ms-1"></i></a>
-            </li>
-        
-          </ul>
-        </div>
-      </div>
-    </nav>
-</section>
+ <?php include 'header.php'; ?>
  </div>
  <div class="main_2 clearfix">
+
+
  <section id="center" class="center_login">
    <div class="center_om clearfix">
      <div class="container-xl">
@@ -102,7 +103,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="login_1 p-4 m-auto">
 	 <h3 class="col_oran">Login</h3>
 	 <p>login with your account</p>
-   <form action="login.php" method="post">
+   <?php 
+      if (isset($error_message) && $error_message != '') {
+          echo '<div class="error red" style="color: red; font-size: 14px;">' . $error_message . '</div>';
+      }
+    ?>
+
+   <form action="" method="post">
       <h6 class="mt-4">Email Address</h6>
       <input type="email" name="email" class="form-control" placeholder="Your Email">
       <h6 class="mt-4">Password</h6>
@@ -116,7 +123,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
         <a class="col_oran" href="#">Forgot Password?</a>
       </div>
-      <button type="submit" class="button">Login<i class="fa fa-sign-in ms-1"></i></button>
+      <button type="submit" name="form1" class="button">Login<i class="fa fa-sign-in ms-1"></i></button>
   </form>
    	<p class="mt-4 mb-0">Don't have an account? <a class="col_oran" href="register.php">Register</a></p>
 	</div>
