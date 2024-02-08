@@ -44,9 +44,9 @@
 	 <h3 class="col_oran">Login</h3>
 	 <p>login with your account</p>
 	 <h6 class="mt-4">Email Address</h6>
-	 <input type="email" class="form-control" name="email" placeholder="Your Email">
+	 <input type="email" class="form-control" name="email" placeholder="Your Email" autocomplete="off" >
 	 <h6 class="mt-4">Password</h6>
-	 <input type="password" class="form-control" name="password" placeholder="Your Password">
+	 <input type="password" class="form-control" name="password" placeholder="Your Password" autocomplete="off">
 	 <div class="d-flex justify-content-between mt-4">
 <div class="form-check">
 <input class="form-check-input" type="checkbox" value="" id="remember">
