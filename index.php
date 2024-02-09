@@ -90,12 +90,14 @@
 	<section id="booking">
 	<div class="container-xl">
 	<div class="booking_m clearfix bg-white">
-	<div class="row booking_1">
+	
+	<?php if(isset($_SESSION['customer_id'])): ?>
+		<div class="row booking_1">
 	<div class="col-md-12">
 	<h4 class="mb-0">Book a car</h4>
 	</div>
 	</div>
-	<form action="assets/reserve_process.php" method="post">
+	<form action="reserve_process.php" method="post">
 	<div class="row booking_2 mt-4">
 	<div class="col-md-4 col-sm-6">
 	<div class="booking_2i">
@@ -123,8 +125,8 @@
 	</div>
 	<div class="col-md-4 col-sm-12">
 	<div class="booking_2i">
-		<h6 class="mb-3"><i class="fa fa-map-marker me-1 col_oran"></i> Drop of Place</h6>
-		<select class="form-select" id="example-select" name="drop_up_place">
+		<h6 class="mb-3"><i class="fa fa-map-marker me-1 col_oran"></i> Drop off Place</h6>
+		<select class="form-select" id="example-select" name="drop_off_place">
 			<option>Delhi road</option>
 			<option>Mumbai city</option>
 			<option>London</option>
@@ -165,19 +167,32 @@
 		<div class="col-md-4 ps-0">
 		<div class="booking_2i1r">
 		<input class="form-control" id="example-date" type="time" name="drop_off_time">
+		<input hidden class="form-control" type="text" name="customer_name" value="<?php echo $fullname; ?>">
+		<input hidden class="form-control" type="text" name="customer_email" value="<?php echo $email; ?>">
 		</div>
 		</div>
 		</div>
+		</div>
+		</div>
+		<div class="button_submit">
+			<h6 class="text-center mb-0"><input class="button pt-3 pb-3 d-block" type="submit" name="submit"></h6>
+		</div>
 	</div>
 	</div>
-	<div class="button_submit">
-		<h6 class="text-center mb-0"><input class="button pt-3 pb-3 d-block" type="submit" name="submit"></h6>
+	<?php else: ?>
+		<div class="row booking_1">
+	<div class="col-md-12">
+	<h4 class="mb-0">Register or Login to Book a car</h4>
 	</div>
 	</div>
+		<h6 class="d-inline-block me-2 mb-0"><a class="button" href="login.php">Login<i class="fa fa-check-circle ms-1"></i> </a></h6>
+		<h6 class="d-inline-block mb-0"><a class="button_1" href="register.php">Register<i class="fa fa-check-circle ms-1"></i> </a></h6>	
+    <?php endif; ?>
 	</div>
 	</div>
-	</div>
+	
 	</form>
+	
 	</section>
 	</div>
 	</div>

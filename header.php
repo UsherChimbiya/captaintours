@@ -43,6 +43,9 @@ $conn->close();
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mb-0 ">
+                    <li class="nav-item">
+                        <a class="nav-link mx-2" href="index.php" style="font-size:15px;font-family:Arial">HOME</a>
+                    </li>
                     <li class="nav-item dropdown">
                         <a style="font-size:15px;font-family:Arial" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             DESTINATION

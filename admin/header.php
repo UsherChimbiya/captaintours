@@ -24,7 +24,7 @@
         <div class="nav-header">
             <a href="index.html" class="brand-logo">
                 <img class="logo-abbr" src="./img/companylogo.png" alt="">
-                <h5 class="text-white m-3">Car Lease</h5>
+                <h5 class="text-white m-3">Captain Tours</h5>
             </a>
 
             <div class="nav-control">

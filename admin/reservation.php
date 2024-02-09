@@ -61,12 +61,14 @@ include("sidebar.php");
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">Destination</th>
-      <th scope="col">Transfer Type</th>
-      <th scope="col">From Place</th>
-      <th scope="col">To Place</th>
-      <th scope="col">Departure</th>
-      <th scope="col">Arrival</th>
+      <th scope="col">Car Type</th>
+      <th scope="col">Pick Up Place</th>
+      <th scope="col">Pick Up Date</th>
+      <th scope="col">Pick Up Time</th>
+      <th scope="col">Drop Off Place</th>
+      <th scope="col">Drop Off Date</th>
+      <th scope="col">Drop Off Time</th>
+      <th scope="col">Status</th>
       <th scope="col">Action</th>
     </tr>
   </thead>
@@ -75,29 +77,34 @@ include("sidebar.php");
  $records_per_page = 10;
  $page = isset($_GET['page']) ? $_GET['page'] : 1;
  $offset = ($page - 1) * $records_per_page;
- $sql = "SELECT * FROM reservation LIMIT $offset, $records_per_page";
+ $sql = "SELECT * FROM reservations LIMIT $offset, $records_per_page";
  $result = $conn->query($sql);
  if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         echo "<tr>
                 <td>{$row['id']}</td>
-                <td>{$row['destination']}</td>
-                <td>{$row['transfer_type']}</td>
-                <td>{$row['from_place']}</td>
-                <td>{$row['to_place']}</td>
-                <td>{$row['departure_date']}</td>
-                <td>{$row['arrival_date']}</td>
+                <td>{$row['car_type']}</td>
+                <td>{$row['pick_up_place']}</td>
+                <td>{$row['pick_up_date']}</td>
+                <td>{$row['pick_up_time']}</td>
+                <td>{$row['drop_off_place']}</td>
+                <td>{$row['drop_off_date']}</td>
+                <td>{$row['drop_off_time']}</td>
+                <td>{$row['status']}</td>
 
                 <td>
-                    <a class='$edit' href='edit_user.php?id={$row['id']}'>Approve</a>
-                </td>
+                <a class='<?php echo $edit; ?>' href='approve_reservation.php?id=<?php ?>'>Approve</a>
+
+               </td>
+
+            
               </tr>";
     }
 
     echo "</table>";
     
     // Pagination links
-    $sql = "SELECT COUNT(*) AS total FROM reservation";
+    $sql = "SELECT COUNT(*) AS total FROM reservations";
     $result = $conn->query($sql);
     $row = $result->fetch_assoc();
     $total_pages = ceil($row['total'] / $records_per_page);
