@@ -93,7 +93,8 @@ include("sidebar.php");
                 <td>{$row['status']}</td>
 
                 <td>
-                <a class='<?php echo $edit; ?>' href='approve_reservation.php?id=<?php echo $row["id"]; ?>'>Approve</a>
+                <a class='<?php echo $edit; ?>' href='approve_reservation.php?id=<?php ?>'>Approve</a>
+
                </td>
 
             
