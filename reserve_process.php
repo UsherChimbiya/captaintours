@@ -27,10 +27,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $drop_off_place = isset($_POST["drop_off_place"]) ? $_POST["drop_off_place"] : "";
         $drop_off_date = isset($_POST["drop_off_date"]) ? $_POST["drop_off_date"] : "";
         $drop_off_time = isset($_POST["drop_off_time"]) ? $_POST["drop_off_time"] : "";
-
+        $customer_name = $_POST["customer_name"];
+        $customer_email = $_POST["customer_email"];
+       
         // Prepare and execute SQL statement
-        $sql = "INSERT INTO reservations (car_type, pick_up_place, pick_up_date, pick_up_time, drop_off_place, drop_off_date, drop_off_time)
-                VALUES ('$car_type', '$pick_up_place', '$pick_up_date', '$pick_up_time', '$drop_off_place', '$drop_off_date', '$drop_off_time')";
+        $sql = "INSERT INTO reservations (car_type, pick_up_place, pick_up_date, pick_up_time, drop_off_place, drop_off_date, drop_off_time, customer_name, customer_email)
+                VALUES ('$car_type', '$pick_up_place', '$pick_up_date', '$pick_up_time', '$drop_off_place', '$drop_off_date', '$drop_off_time', '$customer_name', '$customer_email')";
 
         if ($conn->query($sql) === TRUE) {
             header("Location:reservation.php");
@@ -59,7 +61,13 @@ if(isset($_SESSION['customer_id']) && isset($_SESSION['form_data'])) {
     $drop_off_place = isset($form_data["drop_off_place"]) ? $form_data["drop_off_place"] : "";
     $drop_off_date = isset($form_data["drop_off_date"]) ? $form_data["drop_off_date"] : "";
     $drop_off_time = isset($form_data["drop_off_time"]) ? $form_data["drop_off_time"] : "";
+    $customer_name = $_POST["customer_name"];
+    $customer_email = $_POST["customer_email"];
+       
     // You can then populate your form fields with these values
+    $sql = "INSERT INTO reservations (car_type, pick_up_place, pick_up_date, pick_up_time, drop_off_place, drop_off_date, drop_off_time, customer_name, customer_email)
+    VALUES ('$car_type', '$pick_up_place', '$pick_up_date', '$pick_up_time', '$drop_off_place', '$drop_off_date', '$drop_off_time', '$customer_name', '$customer_email')";
+
 }
 // Close the connection
 $conn->close();
