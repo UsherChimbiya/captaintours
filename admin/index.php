@@ -61,8 +61,7 @@ Remember Me
 <a class="col_oran" href="#">Forgot Password?</a>
 </div>
     <h6 class="mt-4 mb-0"><button type="submit" class="btn btn-danger">Login <i class="fa fa-sign-in ms-1"></i></button></h6> 
-	<p class="mt-4 mb-0">Don't have an account? <a class="col_oran" href="register.html">Register</a></p>
-	</div>
+		</div>
    </div>
   </div> 
   </form> 
