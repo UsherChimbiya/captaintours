@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 07, 2024 at 06:38 PM
+-- Generation Time: Feb 09, 2024 at 08:03 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -33,15 +33,16 @@ CREATE TABLE `contactus` (
   `email` varchar(50) NOT NULL,
   `subject` varchar(250) NOT NULL,
   `website` varchar(250) DEFAULT NULL,
-  `message` varchar(250) NOT NULL
+  `message` varchar(250) NOT NULL,
+  `status` varchar(50) NOT NULL DEFAULT 'Pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `contactus`
 --
 
-INSERT INTO `contactus` (`id`, `full_name`, `email`, `subject`, `website`, `message`) VALUES
-(3, 'Chanda Indian', 'bwalya@gmail.com', 'I want to pay for my hosting fee', 'b@gmail.com', 'hey');
+INSERT INTO `contactus` (`id`, `full_name`, `email`, `subject`, `website`, `message`, `status`) VALUES
+(3, 'Chanda Indian', 'bwalya@gmail.com', 'I want to pay for my hosting fee', 'b@gmail.com', 'hey', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -63,35 +64,34 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`id`, `fullname`, `email`, `password`, `registration_time`, `role`) VALUES
-(1, 'u7', 'u7@gmail.com', '$2y$10$5i6W8sZcOzB6kdWeqXW9PONxsKw5UxYraU/JK0hPwTaqvVGsPkCVG', '2024-02-07 17:34:40', 'user');
+(2, 'Nswana jane', 'angela@gmail.com', '$2y$10$cJ.t53ber7CnCCpFdC6XsuJzGHKcyesfuOuy1vEO6S5RCJXWQrYsG', '2024-02-08 13:19:01', 'user'),
+(3, 'karen', 'karen@gmail.com', '$2y$10$kPa4pMOlT8dWnvlWluISJuCI10/RiPZIdIeJgEhNw1UrSRVbImMc2', '2024-02-08 16:27:02', 'user');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `reservation`
+-- Table structure for table `reservations`
 --
 
-CREATE TABLE `reservation` (
+CREATE TABLE `reservations` (
   `id` int(11) NOT NULL,
-  `destination` varchar(250) NOT NULL,
-  `transfer_type` varchar(250) NOT NULL,
-  `from_place` varchar(250) NOT NULL,
-  `to_place` varchar(250) NOT NULL,
-  `arrival_date` datetime NOT NULL DEFAULT current_timestamp(),
-  `departure_date` datetime NOT NULL DEFAULT current_timestamp(),
-  `adult` varchar(250) DEFAULT NULL,
-  `children` varchar(250) DEFAULT NULL
+  `car_type` varchar(50) DEFAULT NULL,
+  `pick_up_place` varchar(50) DEFAULT NULL,
+  `pick_up_date` varchar(50) DEFAULT NULL,
+  `pick_up_time` varchar(50) DEFAULT NULL,
+  `drop_off_place` varchar(50) DEFAULT NULL,
+  `drop_off_date` varchar(50) DEFAULT NULL,
+  `drop_off_time` varchar(50) DEFAULT NULL,
+  `status` varchar(50) NOT NULL DEFAULT 'Pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `reservation`
+-- Dumping data for table `reservations`
 --
 
-INSERT INTO `reservation` (`id`, `destination`, `transfer_type`, `from_place`, `to_place`, `arrival_date`, `departure_date`, `adult`, `children`) VALUES
-(1, 'Chinsali', 'One round type', 'UA', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '22', '1'),
-(2, 'Chinsali', 'One round type', 'UA', 'UA', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '22', '1'),
-(3, 'Chinsali', 'One round type', 'USA', 'UA', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '21', '1'),
-(4, 'Chinsali', 'One round type', 'USA', 'USA', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '21', '0');
+INSERT INTO `reservations` (`id`, `car_type`, `pick_up_place`, `pick_up_date`, `pick_up_time`, `drop_off_place`, `drop_off_date`, `drop_off_time`, `status`) VALUES
+(16, 'Lexus CT', 'Delhi road', '2024-02-08', '19:43', 'Delhi road', '2024-02-08', '19:43', 'Pending'),
+(17, 'Toyota', 'Delhi road', '2024-02-08', '', 'Delhi road', '2024-02-08', '19:03', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -107,6 +107,15 @@ CREATE TABLE `users` (
   `registration_time` timestamp NOT NULL DEFAULT current_timestamp(),
   `role` varchar(50) NOT NULL DEFAULT 'user'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `fullname`, `email`, `password`, `registration_time`, `role`) VALUES
+(28, 'karen Nakamba', 'nakamba1@gmail.com', '$2y$10$6IjRda6xR5FElDhWi9E5/O8fDFS8k14NOUTVbRmyYXvkHQs2wiV2q', '2024-02-08 17:24:46', 'user'),
+(29, 'Nswana Cobet', 'nswanacobet@gmail.com', '$2y$10$hO0Jkq5UfWHO8gxfpzen2OUDOyB6VeA.6ro9/CJk/t1uYW4bY0MaC', '2024-02-08 17:32:48', 'user'),
+(30, 'Boris Bwalya', 'boris@gmail.com', '$2y$10$mj5HCW.uhfPVEb4eA9ZVVuToCeezh.gSp1MdjGwYz7AIqiPPghY4K', '2024-02-08 18:17:19', 'user');
 
 --
 -- Indexes for dumped tables
@@ -125,9 +134,9 @@ ALTER TABLE `customers`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `reservation`
+-- Indexes for table `reservations`
 --
-ALTER TABLE `reservation`
+ALTER TABLE `reservations`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -151,19 +160,19 @@ ALTER TABLE `contactus`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `reservation`
+-- AUTO_INCREMENT for table `reservations`
 --
-ALTER TABLE `reservation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+ALTER TABLE `reservations`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
